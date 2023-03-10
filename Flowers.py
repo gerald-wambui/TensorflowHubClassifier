@@ -10,5 +10,10 @@ import logging
 logger = tf.get_logger()
 logger.setLevel(logging.ERROR)
 
-#download datasets
-splits = ...
+#download dataset
+(training_set, validation_set), dataset_info = tfds.load(
+    'tf_flowers',  # name of dataset to download
+    split=['train[:70%]', 'train[70%:]'],
+    with_info=True,
+    as_supervised=True
+)
