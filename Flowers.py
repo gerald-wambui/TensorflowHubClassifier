@@ -17,3 +17,11 @@ logger.setLevel(logging.ERROR)
     with_info=True,
     as_supervised=True
 )
+
+num_classes = dataset_info.features['label'].num_classes
+
+num_training_examples=0
+num_validation_examples=0
+
+for example in training_set:
+    num_training_examples += 1
