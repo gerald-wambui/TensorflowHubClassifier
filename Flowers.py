@@ -47,6 +47,15 @@ def format_image(image, label):
 
 BATCH_SIZE = 32
 
-train_batches = training_set.shuffle(num_training_examples//4).map(format_image).batch(BATCH_SIZE).prefetch(1)
+train_batches = training_set.shuffle(num_training_examples // 4).map(format_image).batch(BATCH_SIZE).prefetch(1)
 
 validation_batches = validation_set.map(format_image).batch(BATCH_SIZE).prefetch(1)
+
+# Feature extractor creation
+URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/4"
+feature_extractor = hub.KerasLayer(URL,
+                                   input_shape=(IMAGE_RES, IMAGE_RES, 3))
+
+feature_extractor.trainable = False
+
+model = tf.keras
