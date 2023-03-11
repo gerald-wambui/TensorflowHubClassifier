@@ -58,4 +58,8 @@ feature_extractor = hub.KerasLayer(URL,
 
 feature_extractor.trainable = False
 
-model = tf.keras
+model = tf.keras.Sequential([
+    feature_extractor,
+    layers.Dense(num_classes)
+])
+model.summary()
